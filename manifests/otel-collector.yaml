@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  labels:
+    app: otel-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: otel-collector
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+          image: otel/opentelemetry-collector-contrib:0.100.0
+          command: ['--config=/etc/otel-collector.yaml']
+          ports:
+            - containerPort: 4317
+          volumeMounts:
+          - mountPath: /etc/
+            name: otel-collector-config
+      volumes:
+      - configMap:
+          items:
+          - key: config.yaml
+            path: otel-collector.yaml
+          name: otel-collector-config
+        name: otel-collector-config
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector-service
+spec:
+  selector:
+    app: otel-collector
+  ports:
+    - protocol: TCP
+      port: 4317
+      targetPort: 4317
