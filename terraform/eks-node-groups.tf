@@ -51,8 +51,8 @@ resource "aws_eks_node_group" "soldevlife" {
   instance_types = ["t3.medium"] # "t3.medium" is the default instance type
 
   scaling_config {
-    desired_size = 2
-    max_size     = 5
+    desired_size = 4
+    max_size     = 7
     min_size     = 1
   }
 

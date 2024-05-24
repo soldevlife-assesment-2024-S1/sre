@@ -2,51 +2,50 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: otel-collector
-  labels:
-    app: otel-collector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: otel-collector
+      app.kubernetes.io/name: opentelemetrycollector
+
   template:
     metadata:
       labels:
-        app: otel-collector
+        app.kubernetes.io/name: opentelemetrycollector
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: otel-collector
+        - name: otelcol
           resources:
             limits:
-              cpu: "1"
-              memory: "512Mi"
+              memory: "256Mi"
+              cpu: "500m"
           image: otel/opentelemetry-collector-contrib:0.100.0
-          command: ['--config=/etc/otel-collector.yaml']
+          args:
+            - --config=/etc/config.yaml
           ports:
             - containerPort: 4317
           volumeMounts:
-          - mountPath: /etc/
-            name: otel-collector-config
+            - mountPath: /etc/
+              name: otelcol-config
       volumes:
-      - configMap:
-          items:
-          - key: config.yaml
-            path: otel-collector.yaml
-          name: otel-collector-config
-        name: otel-collector-config
-
+        - configMap:
+            items:
+              - key: config.yaml
+                path: config.yaml
+            name: otel-collector-config
+          name: otelcol-config
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: otel-collector-service
 spec:
   selector:
-    app: otel-collector
+    app.kubernetes.io/name: opentelemetrycollector
   ports:
     - protocol: TCP
       port: 4317
       targetPort: 4317
+  type: ClusterIP
