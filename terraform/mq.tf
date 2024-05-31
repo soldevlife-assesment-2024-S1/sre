@@ -5,8 +5,8 @@ resource "aws_mq_broker" "soldevlife" {
   host_instance_type  = "mq.m5.large"
   publicly_accessible = true
   deployment_mode     = "SINGLE_INSTANCE"
-  subnet_ids          = [aws_subnet.private_ap_southeast_1a.id, aws_subnet.private_ap_southeast_1b.id]
-  security_groups     = [aws_security_group.soldevlife.id]
+  subnet_ids          = [aws_subnet.public_ap_southeast_1a.id]
+  # security_groups     = [aws_security_group.soldevlife.id]
   tags = {
     App = "soldevlife"
   }
