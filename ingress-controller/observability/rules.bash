@@ -17,5 +17,25 @@ spec:
    - name: promstack-grafana
      kind: Service
      port: 80
-     namespace: monitoring
+" | kubectl delete -f -
+
+echo "
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: monitor
+  annotations:
+    konghq.com/strip-path: 'true'
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /monitor
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: promstack-grafana
+            port:
+              number: 80
 " | kubectl apply -f -

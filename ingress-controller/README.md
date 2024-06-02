@@ -57,3 +57,6 @@ Install Kong Ingress Controller and Kong Gateway with Helm:
 ```bash
  helm install kong kong/ingress -n kong --create-namespace 
  ```
+
+helm uninstall kong -n kong
+```

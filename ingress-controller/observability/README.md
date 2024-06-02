@@ -28,7 +28,7 @@ config:
   upstream_health_metrics: true
   latency_metrics: true
   per_consumer: false
-' | kubectl apply -f -
+' | kubectl delete -f -
 ```
 
 ## Access Grafana Dashboard 
