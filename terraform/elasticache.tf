@@ -6,7 +6,7 @@ resource "aws_elasticache_subnet_group" "soldevlife" {
 resource "aws_elasticache_cluster" "soldevlife" {
   cluster_id           = "soldevlife"
   engine               = "redis"
-  node_type            = "cache.r6g.large"
+  node_type            = "cache.t4g.small"
   num_cache_nodes      = 1
   parameter_group_name = "default.redis7"
   port                 = 6379
