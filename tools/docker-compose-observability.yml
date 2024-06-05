@@ -8,6 +8,7 @@ services:
       - ./otel-collector.yaml:/etc/otel-collector.yaml
     ports:
       - 4317:4317
+      - 9091:9090
 
   prometheus:
     image: prom/prometheus:v2.52.0
