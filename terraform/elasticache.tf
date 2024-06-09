@@ -1,6 +1,6 @@
 resource "aws_elasticache_subnet_group" "soldevlife" {
   name       = "soldevlife"
-  subnet_ids = [aws_subnet.private_ap_southeast_1a.id, aws_subnet.private_ap_southeast_1b.id]
+  subnet_ids = [aws_subnet.private_ap_southeast_1a.id, aws_subnet.private_ap_southeast_1b.id, aws_subnet.public_ap_southeast_1a.id, aws_subnet.public_ap_southeast_1b.id]
 }
 
 resource "aws_elasticache_cluster" "soldevlife" {

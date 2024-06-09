@@ -32,6 +32,12 @@ resource "aws_security_group" "soldevlife" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
+    from_port   = 4318
+    to_port     = 4318
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
     from_port   = 16686
     to_port     = 16686
     protocol    = "tcp"
@@ -52,6 +58,12 @@ resource "aws_security_group" "soldevlife" {
   ingress {
     from_port   = 3000
     to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 3100
+    to_port     = 3100
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
