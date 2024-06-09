@@ -5,7 +5,7 @@ export const options = {
   // A number specifying the number of VUs to run concurrently.
   vus: 10000,
   // A string specifying the total duration of the test run.
-  duration: '30s',
+  duration: '60s',
 
   // The following section contains configuration options for execution of this
   // test script in Grafana Cloud.
@@ -68,10 +68,10 @@ export const options = {
 //
 export default function() {
   let payload = JSON.stringify({
-    ticket_detail_id: 4,
+    ticket_detail_id: 3,
     full_name: 'Alex Smith',
     personal_id: 'S1234567',
-    user_id: 8,
+    user_id: 1,
     total_tickets: 1,
   });
 
@@ -79,10 +79,10 @@ export default function() {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InphaW5AZ2FtYWlsbC5jb20iLCJleHAiOjE3MTc0MjE4MDcsImlkIjo4fQ.WOYDZ_HdHCsSN_lSwgWC7yMVokdQwVIyzfq8Lf82Fig',
+      'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InphaW5AZ2FtYWlsLmNvbSIsImV4cCI6MTcxNzY4NzU2OCwiaWQiOjF9.3v64uvbNqG7Bz2tl0EYRhXo63IO4CzP0yEIMDtVTMcc',
     },
   };
-  let resp = http.post('http://a56f5ea98d13c460381fcb5e5651e569-68221043.ap-southeast-1.elb.amazonaws.com/booking/api/v1/book', payload, params);
+  let resp = http.post('http://a7b52563210a449fc9ab178f0edc7dd0-968752565.ap-southeast-1.elb.amazonaws.com/booking/api/v1/book', payload, params);
   console.log('Response time was ' + String(resp.timings.duration) + ' ms');
   console.log('Response status was ' + String(resp.status));
   console.log('Response body was ' + String(resp.body));
